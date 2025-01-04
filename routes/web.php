@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\ParticipantController;
-use App\Models\Participant;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -10,4 +9,5 @@ Route::get('/', function () {
 
 Route::prefix("participant")->name("participant")->group(function(){
     Route::get("/register", [ParticipantController::class, "register"])->name(".register");
+    Route::post("/register", [ParticipantController::class, "register_store"]); //post
 });

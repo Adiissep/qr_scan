@@ -1,12 +1,13 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ReportController;
 use App\Http\Controllers\ScanController;
 use App\Models\Scan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
+Route::get('/user', function (Request $request) { //
     return $request->user();
 })->middleware('auth:sanctum');
 
@@ -26,4 +27,8 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('scan', [ScanController::class, 'store']);
     Route::put('scan/{id}', [ScanController::class, 'update']);
     Route::delete('scan/{id}', [ScanController::class, 'destroy']);
+
+    Route::post('scan_qr', [ScanController::class, "scan_qr"]);
+
+    Route::post('report', [ReportController::class, "index"]);
 });

@@ -25,5 +25,17 @@ class UserSeeder extends Seeder
             'username' => 'vendor',
             'password' => Hash::make('vendor'),
         ]);
+
+        User::factory()->create([
+            'name' => 'admin',
+            'username' => 'admin',
+            'password' => Hash::make('admin'),
+        ]);
+
+        User::factory()->create([
+            'name' => 'user',
+            'username' => 'user',
+            'password' => Hash::make('user'),
+        ]);
     }
 }

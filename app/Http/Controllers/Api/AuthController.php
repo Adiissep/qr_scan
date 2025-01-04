@@ -15,7 +15,7 @@ class AuthController extends Controller
         //validation
         $validator = Validator::make($request->all(),
             [
-                'username' => 'required | unique:user', //kurang d, data menjadi uniq agar tidak ada duplikat
+                'username' => 'required', //kurang d, data menjadi uniq agar tidak ada duplikat
                 'password' => 'required',
             ]
         );
@@ -26,7 +26,7 @@ class AuthController extends Controller
                 'message' => "validation errors",
                 'errors' => $validator->errors(),
                 'data' => [],
-            ]);
+            ], 422);
         }
 
         //cek username apakah ada di database
@@ -37,7 +37,7 @@ class AuthController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'User/Password Salah', //pesan kesalahan
-            ]);
+            ], 401);
         }
 
         //jika username & pwd benar, generate token
@@ -48,7 +48,7 @@ class AuthController extends Controller
             'message' => 'oke',
             'data' => [
                 'id' => $user->id,
-                'nama' => $user->nama,
+                'name' => $user->name,
                 'token' => $token,
             ]
         ], 200);
